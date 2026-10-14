@@ -81,6 +81,9 @@ p{margin:0;max-width:65ch}
 .proj dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:14px}
 .proj dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
 .proj dd{margin:0}
+.proj.feature{grid-column:1/-1;border:2px solid var(--accent)}
+.live{justify-self:start;font:500 14px var(--body);padding:8px 14px;background:var(--accent);color:var(--accent-ink);text-decoration:none}
+.live:hover{filter:brightness(1.08)}
 
 /* draft slots — content Kenneth still needs to supply */
 .draft{background:var(--draft);border:1px dashed var(--draft-line)}
@@ -157,23 +160,73 @@ footer{margin-top:48px;font-family:var(--mono);font-size:12px;color:var(--muted)
   <section id="projects">
     <div class="sec-label">Cargo<b>AI × SCM Projects</b></div>
     <div class="stack">
+      <p>Nine team projects from <strong>BULM721, Global Supply Chain Management in the Age of AI</strong>, built with a five-person team. Each one takes a real SCM decision, uses AI to do the analysis, and ends with a human check on what the AI got right or wrong. They build on each other, from single calculations to a chain of agents publishing a live dashboard.</p>
       <div class="projects">
-        <article class="proj draft">
-          <div class="tag">Project 01 · Forecasting</div>
-          <h3>Your project title</h3>
-          <dl><dt>Problem</dt><dd>What supply chain problem did you tackle?</dd>
-              <dt>AI / tools</dt><dd>e.g. Python, Excel Solver, ML model, LLM</dd>
-              <dt>Result</dt><dd>A number: % error reduced, $ saved, days cut</dd></dl>
+        <article class="proj feature">
+          <div class="tag">HW 09 · Orchestration</div>
+          <h3>Agent Orchestration: Demand → Reorder</h3>
+          <dl><dt>Problem</dt><dd>Connect a demand-sensing agent to a reorder agent so forecasts drive stock decisions automatically.</dd>
+              <dt>Built</dt><dd>Two agents in Claude Code handing off through a shared data file; batch runs across forecast rounds; live dashboards on GitHub Pages and Google Sheets.</dd>
+              <dt>Finding</dt><dd>A 4-week reorder point fails with monthly inventory checks. Covering lead time, the review gap and buffer needs about 8.3 weeks.</dd></dl>
+          <a class="live" href="https://kennivory.github.io/frostbitedashboard/" target="_blank" rel="noopener">View live dashboard ↗</a>
         </article>
-        <article class="proj draft">
-          <div class="tag">Project 02 · Network / Inventory</div>
-          <h3>Your project title</h3>
-          <dl><dt>Problem</dt><dd>Class project, case competition, or work problem</dd>
-              <dt>AI / tools</dt><dd>What you built or used</dd>
-              <dt>Result</dt><dd>What changed because of it</dd></dl>
+        <article class="proj">
+          <div class="tag">HW 08 · Demand sensing</div>
+          <h3>The Demand-Sensing Agent</h3>
+          <dl><dt>Problem</dt><dd>Forecast monthly sales from weather, customer reviews and industry news.</dd>
+              <dt>Built</dt><dd>Multiple regression on temperature, a review-sentiment score and a news index, refit each round from a Google Drive workbook, plus a shared dashboard tab.</dd>
+              <dt>Finding</dt><dd>R² settled near 0.98 at 12 months. Forecast misses of +145 and −109 units (about 10%) came from proxy inputs, not the model.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 07 · Forecasting</div>
+          <h3>Demand Forecasting Accuracy</h3>
+          <dl><dt>Problem</dt><dd>Pick a forecasting method for 24 months of growing demand.</dd>
+              <dt>Built</dt><dd>3-period moving average vs. exponential smoothing (α = 0.3), scored on MAD and MSE in a spreadsheet.</dd>
+              <dt>Finding</dt><dd>Moving average won (about 17% lower MAD, 44% lower MSE), but tracking signals of +13 and +17 showed both were biased low. Recommended a trend-adjusted method.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 06 · Agent design</div>
+          <h3>Warehouse Data-to-Dashboard Agent</h3>
+          <dl><dt>Problem</dt><dd>Turn a manual data-cleaning and KPI workflow into a reliable AI agent.</dd>
+              <dt>Built</dt><dd>Agent role, tool list, guardrails and four human approval checkpoints; 6-month KPI trend dashboard.</dd>
+              <dt>Finding</dt><dd>Warehouse D's volume more than doubled while its on-time rate fell from 55% to 36%. Damage rate rose from 5% to 8%.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 05 · Customer analytics</div>
+          <h3>Voice of the Customer</h3>
+          <dl><dt>Problem</dt><dd>Find which supply chain failures drive customer complaints.</dd>
+              <dt>Built</dt><dd>AI classification of reviews into seven themes across three datasets, with human correction of miscategorized reviews.</dd>
+              <dt>Finding</dt><dd>Shipping/delivery led every dataset (27–28%). About half of all complaints trace back to the distribution center.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 04 · Network design</div>
+          <h3>Distribution Network Optimization</h3>
+          <dl><dt>Problem</dt><dd>Choose unified or segmented distribution for product lines with different demand patterns.</dd>
+              <dt>Built</dt><dd>24-week cost models per segment under tiered and flat pricing.</dd>
+              <dt>Finding</dt><dd>A mixed network matched to each segment's volatility cut cost about 10.6% vs. all-unified and 6.9% vs. all-segmented.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 03 · Capacity</div>
+          <h3>Bottlenecks &amp; Capacity Investment</h3>
+          <dl><dt>Problem</dt><dd>Close a throughput gap of 355 vs. 400 units/hr on a $3,500 budget.</dd>
+              <dt>Built</dt><dd>Theory of Constraints analysis across parallel lines, with investment sequencing.</dd>
+              <dt>Finding</dt><dd>Funding the cheapest bottleneck first reaches about 411–414 units/hr, with a 2.5% buffer before the next constraint takes over.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 02 · Data &amp; KPIs</div>
+          <h3>Warehouse Operations Dashboard</h3>
+          <dl><dt>Problem</dt><dd>Make a messy two-table order export usable for decisions.</dd>
+              <dt>Built</dt><dd>Data audit, rule-based cleaning (flag, never guess), 12 KPIs and an Excel dashboard with conditional formatting.</dd>
+              <dt>Finding</dt><dd>On-time rate was 52%. Warehouse D handled 11 of 25 orders at 36% on time.</dd></dl>
+        </article>
+        <article class="proj">
+          <div class="tag">HW 01 · Transportation</div>
+          <h3>Transportation Mode Selection</h3>
+          <dl><dt>Problem</dt><dd>Pick truck, rail or air for each lane under delivery deadlines.</dd>
+              <dt>Built</dt><dd>Fixed + variable cost models per lane, filtered by transit time.</dd>
+              <dt>Finding</dt><dd>Deadlines, not distance, drove cost. Moving one lane from 2 to 3 days would save $12,400 by switching air to truck.</dd></dl>
         </article>
       </div>
-      <p class="draft-note">Draft slots. Send me your projects and I'll write these up.</p>
     </div>
   </section>
 
@@ -184,8 +237,14 @@ footer{margin-top:48px;font-family:var(--mono);font-size:12px;color:var(--muted)
         <span class="chip">Operations coordination</span>
         <span class="chip">Humanitarian logistics</span>
         <span class="chip">Military logistics</span>
-        <span class="chip dashed">+ your tools (Excel, SQL, Python, Tableau, SAP…)</span>
-        <span class="chip dashed">+ AI tools you use</span>
+        <span class="chip">Claude &amp; Claude Code</span>
+        <span class="chip">AI agent design &amp; guardrails</span>
+        <span class="chip">Demand forecasting &amp; regression</span>
+        <span class="chip">Theory of Constraints</span>
+        <span class="chip">Network &amp; transportation cost modeling</span>
+        <span class="chip">Data cleaning &amp; KPI design</span>
+        <span class="chip">Excel &amp; Google Sheets dashboards</span>
+        <span class="chip">GitHub Pages</span>
         <span class="chip dashed">+ certifications (APICS / ASCM, Lean Six Sigma…)</span>
       </div>
     </div>
